@@ -482,10 +482,11 @@ onMounted(async () => {
     background: #f5f5f5;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 800px) {
     .ranking-list {
-        grid-template-columns: 1fr;
-        max-width: 800px;
+        grid-template-columns:repeat(1 1fr) !important;
+        max-width: 700px;
+        min-width: 500px;
         margin: 0 auto;
     }
 }
