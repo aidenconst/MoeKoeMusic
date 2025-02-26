@@ -166,7 +166,7 @@
                             <span v-for="(charData, charIndex) in lineData.characters" :key="charIndex" class="char" 
                                 :style="{
                                     // 'transition': `background-position 0s ease`
-                                     'transition': `background-position ${charData.highlightTime/2}s ease`,
+                                     'transition': `background-position ${charData.highlightTime}s ease`,
                                     // '--duration': `${charData.highlightTime}s`,
                                     // transition: `background-position var(--duration, 0.4s) ease`
                                 }"
