@@ -730,7 +730,7 @@ const parseLyrics = (text) => {
                   lyrInfo.startTime = lineT[0] + parseInt(lyrData[1]);//开始时间
                   lyrInfo.endTime = lyrInfo.startTime + parseInt(lyrData[2]);//结束时间
                   lyrInfo.offset = parseInt(lyrData[3]);//偏移量
-                  lyrInfo.highlightTime = (parseInt(lyrData[2]) + lyrInfo.offset)/1000 || 0;//播放时间
+                  lyrInfo.highlightTime = (parseInt(lyrData[2]) + lyrInfo.offset)/1000/2 || 0;//播放时间
                   lyrInfo.highlighted = false;//是否高亮
                   return lyrInfo;
               })
