@@ -154,7 +154,7 @@ const getCharacterStyle = (char) => {
         backgroundImage: `linear-gradient(to right, ${highlightColor.value} 50%, ${defaultColor.value} 50%)`,
         backgroundSize: '200% 100%',
         backgroundPosition: `${100 - fillPercent}% 0`,
-        transition: 'background-position 0.3s ease-out'
+        transition: 'background-position 0.1s ease-out'
     }
 }
 

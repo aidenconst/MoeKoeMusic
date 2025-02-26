@@ -226,6 +226,7 @@ const createPlaylist = async () => {
     font-weight: bold;
     margin-bottom: 30px;
     color: var(--primary-color);
+    margin-top:3vh;
 }
 
 .profile-section {

@@ -177,14 +177,17 @@ defineExpose({
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 25px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s;
     margin-top: 10px;
     font-size: 20px;
     width: auto;
 }
-
+.btn:nth-child(2) {
+    background-color: var(--color-secondary-bg-for-transparent);
+    color: #333;
+}
 
 .loading-overlay {
     position: fixed;

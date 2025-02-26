@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-        <h2 class="section-title">{{ $t('tui-jian') }}</h2>
+        <h2 class="section-title">{{ $t('tui-jian') }}
+            <span class="play-all-icon" ><i class="fas fa-compact-disc"></i></span>
+        </h2>
         <div class="recommendations">
             <div class="recommend-card gradient-background">
                 <div class="radio-card">
@@ -26,7 +28,7 @@
                     </div>
                     <div class="radio-content gradient-background">
                         <div class="radio-title">
-                            <span class="heart-icon">💖</span>
+                            <span class="shuffle-icon" @click="toggleMode" >💖</span>
                             MoeKoe Radio
                             <span class="shuffle-icon" @click="toggleMode">{{ modeIcon }}</span>
                         </div>
@@ -92,7 +94,9 @@
                 </div>
             </div>
         </div>
-        <h2 class="section-title">{{ $t('tui-jian-ge-dan') }}</h2>
+        <h2 class="section-title">{{ $t('tui-jian-ge-dan') }}
+            <span class="play-all-icon"><i class="fas fa-list-ul"></i></span>
+        </h2>
         <div class="playlist-grid">
             <div class="playlist-item" v-for="(playlist, index) in special_list" :key="index">
                 <router-link :to="{
@@ -246,9 +250,9 @@ const addAllSongsToQueue = () => {
 
 <style scoped>
 .container {
-    max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 .section-title {
@@ -256,19 +260,27 @@ const addAllSongsToQueue = () => {
     font-weight: bold;
     margin-bottom: 30px;
     color: var(--primary-color);
+    margin-left: 20px;
+    letter-spacing: 2px; /* 设置文字间距为2像素 */
 }
 
 .recommendations {
     display: flex;
-    gap: 35px;
+    gap: 3em;
     margin-bottom: 40px;
+    margin:0 20px;
 }
 
 .recommend-card {
-    width: 400px;
+    flex: 1 1 calc(33.333% - 15px);
     height: 200px;
+    display: flex;
+    flex-wrap: wrap;
     border-radius: 15px;
     overflow: hidden;
+    align-items: center;
+    
+    gap: 3em;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -298,17 +310,21 @@ const addAllSongsToQueue = () => {
 .song-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 20px 35px;
+    max-width: 100%;
     margin-top: 20px;
+    justify-content: center; /* 水平居中 */
+    padding: 0 20px;
 }
 
 .song-item {
+    flex: 1 1 calc(20% - 15px);
     display: flex;
     align-items: center;
-    gap: 15px;
-    width: 250px;
+    gap: 10px;
     background-color: #fff;
     padding: 10px;
+    box-sizing: border-box;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -320,9 +336,9 @@ const addAllSongsToQueue = () => {
 }
 
 .song-cover {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
 }
 
 .song-info {
@@ -333,7 +349,7 @@ const addAllSongsToQueue = () => {
 .song-title {
     font-size: 16px;
     font-weight: bold;
-    color: var(--primary-color);
+    color: #333;
 }
 
 .song-artist {
@@ -347,19 +363,23 @@ const addAllSongsToQueue = () => {
 
 .playlist-grid {
     display: flex;
-    gap: 35px;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center; /* 水平居中 */
+    gap: 30px; /* 设置间隙为15px */
+    max-width: 100%; /* 确保容器宽度适应父元素 */
+    padding: 0 20px;
 }
 
 .playlist-item {
+    flex: 1 1 calc(20% - 30px); /* 使每个卡片占据25%的宽度，减去间隙的一半 */
+    box-sizing: border-box; /* 确保padding和border不会影响盒模型的宽度 */
     background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 200px;
+    gap: 30px;
 }
 
 .playlist-item:hover {
@@ -381,7 +401,7 @@ const addAllSongsToQueue = () => {
     font-weight: bold;
     margin-bottom: 5px;
     font-size: 16px;
-    color: var(--primary-color);
+    color: #333;
 }
 
 .playlist-description {
@@ -771,8 +791,8 @@ const addAllSongsToQueue = () => {
 
 .play-all-icon {
     cursor: pointer;
-    font-size: 20px;
-    color: var(--primary-color);
+    font-size: 26px;
+    color: var(--order-color);
     transition: transform 0.2s ease;
 }
 

@@ -110,7 +110,7 @@ const loadRandomRanks = async (rankList, count = 4) => {
 const toggleRank = async (rank) => {
     const index = selectedRankIds.value.indexOf(rank.rankid);
     
-    if (index === -1 && selectedRankIds.value.length < 6) {
+    if (index === -1 && selectedRankIds.value.length < 27) {
         selectedRankIds.value.push(rank.rankid);
         const songsResponse = await get(`/rank/audio?rankid=${rank.rankid}&page=${page}&pagesize=${pagesize}`);
         if (songsResponse.status === 1) {
@@ -235,8 +235,8 @@ onMounted(async () => {
 .ranking-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 20px;
+    gap: 60px;
+     padding: 20px; 
 }
 
 .ranking-item {

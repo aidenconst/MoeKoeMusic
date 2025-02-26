@@ -69,7 +69,12 @@
                     :items-limit="2000" :prerender="Math.min(10, musicQueueStore.queue.length)" ref="queueScroller"
                     class="queue-list">
                     <template #default="{ item, index }">
-                        <li class="queue-item" :class="{ 'playing': currentSong.hash == item.hash }" :key="item.id">
+                        <li class="queue-item" :class="{ 'playing': currentSong.hash == item.hash }" :key="item.id" @click="addSongToQueue(
+                                        item.hash,
+                                        item.name,
+                                        item.img,
+                                        item.author
+                                    )">
                             <div class="queue-song-info">
                                 <span class="queue-song-title">{{ item.name }}</span>
                                 <span class="queue-artist">{{ $formatMilliseconds(item.timeLength) }}</span>
@@ -78,12 +83,12 @@
                                 <button v-if="currentSong.hash == item.hash"
                                     class="queue-play-btn fas fa-music"></button>
                                 <template v-else>
-                                    <button class="queue-play-btn" @click="addSongToQueue(
+                                    <!-- <button class="queue-play-btn" @click="addSongToQueue(
                                         item.hash,
                                         item.name,
                                         item.img,
                                         item.author
-                                    )"><i class="fas fa-play"></i></button>
+                                    )"><i class="fas fa-play"></i></button> -->
                                     <i class="fas fa-times close-store"
                                         @click="musicQueueStore.queue.splice(index, 1); $event.target.closest('li').classList.add('marked-as-deleted');"></i>
                                 </template>
@@ -158,8 +163,14 @@
                     <div v-if="lyricsData.length > 0" id="lyrics"
                         :style="{ fontSize: lyricsFontSize, transform: `translateY(${scrollAmount ? scrollAmount+'px' : '50%'})` }">
                         <div v-for="(lineData, lineIndex) in lyricsData" :key="lineIndex" class="line">
-                            <span v-for="(charData, charIndex) in lineData.characters" :key="charIndex" class="char"
-                                :class="{ highlight: charData.highlighted }">
+                            <span v-for="(charData, charIndex) in lineData.characters" :key="charIndex" class="char" 
+                                :style="{
+                                    // 'transition': `background-position 0s ease`
+                                     'transition': `background-position ${charData.highlightTime/2}s ease`,
+                                    // '--duration': `${charData.highlightTime}s`,
+                                    // transition: `background-position var(--duration, 0.4s) ease`
+                                }"
+                                :class="{ 'highlight': charData.highlighted }">
                                 {{ charData.char }}
                             </span>
                         </div>
@@ -234,6 +245,9 @@ const playlists = ref([]);
 const isPlaylistSelectOpen = ref(false);
 const lyricsFontSize = ref('24px');
 const isInputFocused = ref(false);
+
+
+
 
 // 切换随机/顺序/单曲播放
 const togglePlaybackMode = () => {
@@ -696,22 +710,31 @@ const getLyrics = async (hash) => {
     centerFirstLine();
 }
 
+
 const parseLyrics = (text) => {
     const lines = text.split('\n');
     const parsedLyrics = lines
         .map((line) => {
-            const match = line.match(/^\[(\d+),(\d+)\](.*)/);
-            if (match) {
-                const time = parseInt(match[1]);
-                const duration = parseInt(match[2]);
-                const lyric = match[3].replace(/<.*?>/g, '');
-                const characters = lyric.split('').map((char, index) => ({
-                    char,
-                    startTime: time + (index * duration) / lyric.length,
-                    endTime: time + ((index + 1) * duration) / lyric.length,
-                    highlighted: false,
-                }));
-                return { characters };
+            const lyrLine = line.match(/\[(\d+),(\d+)\]/);
+            let lineT = [];
+            if(lyrLine){
+              lineT[0] = parseInt(lyrLine[1]);//整句歌词开始时间
+              //lineT[1] = parseInt(lyrLine[2]);//整句歌词持续时间
+            }
+            const lyrmatch = line.match(/(\d+),(\d+)$|<(\d+),(\d+),(\d+)>([^<]+)/g);
+            if (lyrmatch) {
+              const characters = lyrmatch.map((lines) => {
+                let lyrInfo = {  };//整句歌词信息
+                const lyrData = lines.match(/<(\d+),(\d+),(\d+)>(.*)/);
+                  lyrInfo.char = lyrData.pop();//歌词
+                  lyrInfo.startTime = lineT[0] + parseInt(lyrData[1]);//开始时间
+                  lyrInfo.endTime = lyrInfo.startTime + parseInt(lyrData[2]);//结束时间
+                  lyrInfo.offset = parseInt(lyrData[3]);//偏移量
+                  lyrInfo.highlightTime = (parseInt(lyrData[2]) + lyrInfo.offset)/1000 || 0;//播放时间
+                  lyrInfo.highlighted = false;//是否高亮
+                  return lyrInfo;
+              })
+              return { characters }
             }
             return null;
         })
@@ -770,7 +793,7 @@ const highlightCurrentChar = (currentTime) => {
         });
 
         if (isLineHighlighted && currentLineIndex !== index) {
-            currentLineIndex = index;
+            currentLineIndex = index;//当前歌词行
             const lyricsContainer = document.getElementById('lyrics-container');
             if (!lyricsContainer) return;
             const containerHeight = lyricsContainer.offsetHeight;
@@ -1095,4 +1118,5 @@ const handleKeyDown = (event) => {
 
 <style scoped>
 @import '@/assets/style/PlayerControl.css';
+
 </style>

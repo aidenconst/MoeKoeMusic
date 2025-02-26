@@ -154,6 +154,7 @@ const playlist = async () => {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 
 .sub-categories {
@@ -171,6 +172,7 @@ const playlist = async () => {
     border-radius: 20px;
     cursor: pointer;
     font-size: 15px;
+    min-width:80px;
 }
 
 .main-categories button.active {

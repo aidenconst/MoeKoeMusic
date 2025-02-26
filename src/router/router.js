@@ -14,10 +14,11 @@ import { MoeAuthStore } from '@/stores/store';
 
 const routes = [
     {
-        path: '/',
+        path: '',
         component: HomeLayout,
+        redirect: '/index', // 自动跳转到 /home
         children: [
-            { path: '', name: 'Index', component: Home },
+            { path: '/index', name: 'Index', component: Home },
             { path: '/discover', name: 'Discover', component: Discover },
             { path: '/library', name: 'Library', component: Library, meta: { requiresAuth: true } },
             { path: '/login', name: 'Login', component: Login },

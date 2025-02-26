@@ -3,38 +3,42 @@ export const applyColorTheme = (theme) => {
     if (theme === 'blue') {
         colors = {
             '--primary-color': '#4A90E2',
+            '--order-color':'#7baae0',
             '--secondary-color': '#AEDFF7',
-            '--background-color': '#E8F4FA',
+            '--background-color': '#FFF0F5',
             '--color-primary': '#2A6DAF',
             '--color-secondary-bg-for-transparent': 'rgba(174, 223, 247, 0.28)',
             '--color-box-shadow': 'rgba(74, 144, 226, 0.2)',
         };
     } else if (theme === 'green') {
         colors = {
-            '--primary-color': '#34C759',
-            '--secondary-color': '#A7F3D0',
-            '--background-color': '#E5F9F0',
+            '--primary-color': '#52c41a',
+            '--order-color':'#96d278',
+            '--secondary-color': '#ceedbf',
+            '--background-color': '#FFF0F5',
             '--color-primary': '#28A745',
             '--color-secondary-bg-for-transparent': 'rgba(167, 243, 208, 0.28)',
-            '--color-box-shadow': 'rgba(52, 199, 89, 0.2)',
+            '--color-box-shadow': 'rgba(83, 196, 26, 0.2)',
         };
     } else if (theme === 'orange') {
         colors = {
             '--primary-color': '#ff6b6b',
+            '--order-color':'#fc8383',
             '--secondary-color': '#FFB6C1',
             '--background-color': '#FFF0F5',
-            '--color-primary': '#ea33e4',
+            '--color-primary': '#fc4141',
             '--color-secondary-bg-for-transparent': 'rgba(209, 209, 214, 0.28)',
             '--color-box-shadow': 'rgba(255, 105, 180, 0.2)',
         };
     } else {
         colors = {
-            '--primary-color': '#FF69B4',
-            '--secondary-color': '#FFB6C1',
+            '--primary-color': '#F74D69',
+            '--order-color':'#f27689',
+            '--secondary-color': '#f791a1',
             '--background-color': '#FFF0F5',
-            '--color-primary': '#ea33e4',
+            '--color-primary': '#ba3045',
             '--color-secondary-bg-for-transparent': 'rgba(209, 209, 214, 0.28)',
-            '--color-box-shadow': 'rgba(255, 105, 180, 0.2)',
+            '--color-box-shadow': 'rgba(247, 77, 105, 0.2)',
         };
     }
 

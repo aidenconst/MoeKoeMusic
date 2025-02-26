@@ -60,16 +60,18 @@ onUnmounted(() => {
 <style>
 :root {
     /* 粉红色主色调 */
-    --primary-color: #FF69B4;
+    --primary-color: #F74D69;
+    /*次要色 */
+    --order-color:#f27689;
     /* 浅粉红色辅助色 */
-    --secondary-color: #FFB6C1;
+    --secondary-color: #f791a1;
     --text-color: #333;
     /* 浅粉色背景 */
     --background-color: #FFF0F5;
     /* 高亮色 */
-    --color-primary: #ea33e4;
+    --color-primary: #ba3045;
     --color-secondary-bg-for-transparent: rgba(209, 209, 214, 0.28);
-    --color-box-shadow: rgba(255, 105, 180, 0.2);
+    --color-box-shadow: rgba(247, 77, 105, 0.2);
 }
 
 * {
@@ -98,7 +100,7 @@ body {
 
 main {
     min-height: calc(100vh - 80px - 188px);
-    max-width: 1200px;
+    max-width:calc(100%);
     margin: 0 auto;
     margin-bottom: 150px;
     padding-top: 80px;

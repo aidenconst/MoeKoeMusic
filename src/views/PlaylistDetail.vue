@@ -309,11 +309,11 @@ const sharePlaylist = () => {
 }
 
 .play-btn {
-    background-color: #ff69b4;
-    color: white;
-    border: none;
+    background-color: transparent;
+    border:1px solid var(--secondary-color);
     padding: 10px 20px;
     border-radius: 5px;
+    color: var(--primary-color);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -329,12 +329,13 @@ const sharePlaylist = () => {
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
+    color: var(--primary-color);
     cursor: pointer;
     border:1px solid var(--secondary-color);
 }
 
 .fav-btn i{
-    color: var(--color-primary);
+    color: var(--primary-color);
 }
 
 .track-list {

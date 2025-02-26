@@ -13,9 +13,10 @@
                 </button>
             </div>
             <div class="nav-links">
-                <router-link to="/">{{ $t('shou-ye') }}</router-link>
+                <router-link v-for="item in menuList" :key="item.id" :to="item.link" active-class="active">{{ $t(item.name) }}</router-link>
+                <!-- <router-link to="/">{{ $t('shou-ye') }}</router-link>
                 <router-link to="/discover">{{ $t('fa-xian') }}</router-link>
-                <router-link to="/library">{{ $t('yin-le-ku') }}</router-link>
+                <router-link to="/library">{{ $t('yin-le-ku') }}</router-link> -->
             </div>
             <div class="search-profile">
                 <div class="search-bar">
@@ -39,7 +40,7 @@
                                 </router-link>
                             </li>
                             <li>
-                                <a :href="downloadUrl || 'https://github.com/iAJue/MoeKoeMusic/releases'" target="_blank" style="position: relative;">
+                                <a :href="downloadUrl || 'https://github.com/aidenconst/MoeKoeMusic'" target="_blank" style="position: relative;">
                                     <i class="fab fa-github"></i> {{ $t('geng-xin') }}
                                     <i v-if="showNewBadge" class="new-badge">new</i>
                                 </a>
@@ -92,6 +93,7 @@ const showNewBadge = ref(false);
 const downloadUrl = ref('');
 const appVersion = ref('');
 const platform = ref('');
+const menuList = ref([{id:0,name:'shou-ye',link:'/index'},{id:1,name:'fa-xian',link:'/discover'},{id:2,name:'yin-le-ku',link:'/library'}])
 onMounted(() => {
     updateNavigationStatus();
     if (window.electron) {
@@ -252,7 +254,7 @@ button:first-child {
 }
 
 button:hover {
-    background: var(--color-secondary-bg-for-transparent)
+    background: var(--color-box-shadow);
 }
 
 button:active {
@@ -281,45 +283,57 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px;
 }
-
+.navigation div:nth-child(1) div:nth-child(3){
+    width: 20%; 
+}
+.navigation div:nth-child(2){
+    width: 60%; 
+}
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 1vh;
     justify-content: center;
     flex-grow: 1;
 }
 
 .nav-links a {
+    letter-spacing: 4px; /* 增加字符间距 */
     text-decoration: none;
-    color: var(--primary-color);
+    color: #333;
     -webkit-app-region: no-drag;
-    font-size: 18px;
+    font-size: 2.5vh;
     font-weight: 700;
     border-radius: 6px;
-    padding: 6px 10px;
+    padding: 10px 1vh;
     transition: .2s;
+    text-align: center;
     -webkit-user-drag: none;
-    margin-right: 12px;
-    margin-left: 12px
+    min-width:90px;
 }
 
 .nav-links a:hover {
-    background: var(--color-secondary-bg-for-transparent)
+    /* background: var(--order-color); */
+    color:var(--order-color);
+    /* transform: translateY(-2px); */
+    /* box-shadow: 0 8px 20px var(--color-box-shadow); */
 }
 
 .nav-links a:active {
     transform: scale(.92);
-    transition: .2s
+    transition: .2s;
 }
 
 .nav-links a.active {
-    color: var(--color-primary)
+    color: var(--primary-color);
 }
-
+.nav-links a.active:hover {
+    /* background: var(--primary-color); */
+    color:var(--order-color);
+}
 .search-profile {
     display: flex;
     align-items: center;
@@ -331,7 +345,7 @@ header {
     border-radius: 20px;
     border: 1px solid var(--secondary-color);
     font-size: 14px;
-    width: 200px;
+    width: 10vh;
     transition: width 0.3s ease;
 }
 
@@ -357,17 +371,18 @@ header {
 
 .profile-menu {
     position: absolute;
-    top: 50px;
+    top: 61px;
     right: 0;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 10px;
-    width: 150px;
+    width: 18vh !important;
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    animation: fadeInOut 0.3s ease-in-out;
+    animation: fadeInOut 0.5s ease-in-out;
 }
 
 @keyframes fadeInOut {
@@ -382,8 +397,10 @@ header {
 
 .profile-menu ul {
     list-style: none;
+    align-items: center;
     padding: 0;
     margin: 0;
+    letter-spacing: 1px; /* 设置文字间距为2像素 */
 }
 
 .profile-menu li a {
@@ -391,14 +408,17 @@ header {
     align-items: center;
     gap: 15px;
     cursor: pointer;
-    padding: 7px 5px;
-    border-radius: 5px;
+    min-width:calc(18vh - 50px);
+    padding: 10px 35px;
+    /* border-radius: 5px; */
     color: #000;
+    letter-spacing: 4px; /* 设置文字间距为2像素 */
     text-decoration: none;
 }
 
 .profile-menu li a:hover {
     background-color: var(--secondary-color);
+    color:#fff;
 }
 
 .modal-overlay {
