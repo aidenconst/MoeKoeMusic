@@ -22,6 +22,11 @@
 </p>
 
 ![images](https://github.com/iAJue/MoeKoeMusic/raw/main/images/5.png)
+## ☑️ 改动
+1.修复歌词播放高亮逻辑
+2.大屏自适应
+3.导航ui调整
+4.播放栏和全屏播放界面调整
 
 ## 前言
 
@@ -48,14 +53,14 @@
 
 ## Todo List
 - [ ] 📺 支持 MV 播放
-- [x] 🌚 Light/Dark Mode 自动切换
+- [ ] 🌚 Light/Dark Mode 自动切换
 - [ ] 👆 支持 Touch Bar
 - [ ] 🖥️ 支持 PWA，可在 Chrome/Edge 里点击地址栏右边的 ➕ 安装到电脑
 - [ ] 🟥 支持 Last.fm Scrobble
 - [ ] 🎧 支持 Mpris
-- [x] ⌨️ 全局快捷键
-- [x] 🤟 多语言支持
-- [x] 📻 桌面歌词
+- [ ] ⌨️ 全局快捷键
+- [ ] 🤟 多语言支持
+- [ ] 📻 桌面歌词
 - [x] ⚙️ 系统架构优化
 - [x] 🎶 歌曲、歌单/收藏、取消
 
